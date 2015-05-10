@@ -9,8 +9,6 @@ function cookiePlugin() {
             var req = options.req;
             var res = options.res;
 
-            var cookies = req ? req.cookies : cookie.parse(document.cookie);
-
             return {
                 plugActionContext: function (actionContext) {
                     actionContext.setCookie = function (name, value, options) {
@@ -22,6 +20,7 @@ function cookiePlugin() {
                         }
                     };
                     actionContext.getCookie = function (name) {
+                        var cookies = req ? req.cookies : cookie.parse(document.cookie);
                         return cookies[name];
                     }
                 }
